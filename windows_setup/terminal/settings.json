@@ -40,6 +40,7 @@
     "profiles": {
         "defaults": {
             "adjustIndistinguishableColors": "indexed",
+            "antialiasingMode": "cleartype",
             "colorScheme": "Tango Light",
             "cursorShape": "vintage",
             "font": {
