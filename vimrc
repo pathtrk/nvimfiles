@@ -1,6 +1,9 @@
 " Disable compatibility with vi which can cause unexpected issues.
 set nocompatible
 
+"Turn off bell
+set belloff=all
+
 " Set 256 colors
 set t_Co=256
 
