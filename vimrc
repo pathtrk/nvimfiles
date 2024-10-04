@@ -1,11 +1,13 @@
+" BASIC SETTINGS ---------------------------------------------------------------- {{{
+
 " Disable compatibility with vi which can cause unexpected issues.
 set nocompatible
 
 "Turn off bell
 set belloff=all
 
-" Set 256 colors
-set t_Co=256
+" Support true colors
+set termguicolors
 
 " Enable type file detection. Vim will be able to try to detect the type of file in use.
 filetype on
@@ -81,22 +83,24 @@ set wildmode=list:longest
 " Wildmenu will ignore files with these extensions.
 set wildignore=*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx
 
+" }}}
+
+
 " PLUGINS ---------------------------------------------------------------- {{{
 
 " Plugin code goes here.
 
 call plug#begin('~/vimfiles/plugged')
 
-Plug 'dense-analysis/ale'
-Plug 'preservim/nerdtree'
+    Plug 'dense-analysis/ale'
+    Plug 'preservim/nerdtree'
+    Plug 'github/copilot.vim'
+    Plug 'leafgarland/typescript-vim'
+    Plug 'tpope/vim-fugitive'
+    Plug 'tpope/vim-surround'
+    Plug 'itchyny/lightline.vim'
 
 call plug#end()
-
-" }}}
-
-" MAPPINGS --------------------------------------------------------------- {{{
-
-" Mappings code goes here.
 
 " }}}
 
@@ -104,6 +108,11 @@ call plug#end()
 " VIMSCRIPT -------------------------------------------------------------- {{{
 
 " This will enable code folding.
+augroup filetype_vim
+    autocmd!
+    autocmd FileType vim setlocal foldmethod=marker
+augroup END
+"
 " Use the marker method of folding.
 "
 " zo to open a single fold under the cursor.
@@ -111,10 +120,6 @@ call plug#end()
 " zR to open all folds.
 " zM to close all folds.
 "
-augroup filetype_vim
-    autocmd!
-    autocmd FileType vim setlocal foldmethod=marker
-augroup END
 
 " If the current file type is HTML, set indentation to 2 spaces.
 autocmd Filetype html setlocal tabstop=2 shiftwidth=2 expandtab
@@ -127,16 +132,33 @@ if version >= 703
     set undoreload=10000
 endif
 
-colorscheme shine
 set background=light
-
+colorscheme lucid
 
 " }}}
 
 
 " STATUS LINE ------------------------------------------------------------ {{{
 
-" Status bar code goes here.
+" Enable the statusline
+set laststatus=2
+
+" Indicataor like -- INSERT -- is unnecessary because the mode information is displayed in the statusline
+set noshowmode
+
+let g:lightline = {
+      \ 'colorscheme': 'ayu_light',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ],
+      \   'right': [ [ 'lineinfo' ],
+      \              [ 'percent' ],
+      \              [ 'fileformat', 'fileencoding', 'filetype', 'charvaluehex' ] ]
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'FugitiveHead'
+      \ },
+      \ }
 
 " }}}
 
@@ -172,6 +194,22 @@ nnoremap N Nzz
 
 " Yank from cursor to the end of line.
 nnoremap Y y$
+
+" Yank all the content with ya
+nnoremap ya ggVG"*y<C-O>
+
+" Clipboard yank and paste
+"
+" Yank all the content with ,ya
+nnoremap ,ya ggVG"*y<C-O>
+"
+" Yank a whole line in normal mode, copy selected in visual mode
+nnoremap ,y "*yy
+vnoremap ,y "*y
+"
+" Yank a whole line in normal mode, copy selected in visual mode
+nnoremap ,p  "*p
+nnoremap ,p  "*p
 
 " Map the F5 key to run a Python script inside Vim.
 " I map F5 to a chain of commands here.
