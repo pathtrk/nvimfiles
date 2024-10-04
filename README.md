@@ -10,10 +10,14 @@ Setting files for vim on Windows
 ## Install
 
 ```powershell
-git clone git@github.com:pathtrk/vimfiles.git $HOME/vimfiles  
-vimfiles\install-vim-plug.ps1
+git clone git@github.com:pathtrk/vimfiles.git $HOME\vimfiles  
 ```
 
-The `install-vim-plug.ps1` script installs [vim-plug](https://github.com/junegunn/vim-plug) for plugin management.
+`install-vim-plug.ps1` script installs [vim-plug](https://github.com/junegunn/vim-plug) for plugin management.
+
+```powershell
+cd $HOME\vimfiles
+.\install-vim-plug.ps1
+```
 
 Running `:PlugInstall` inside vim editor downloads specified plugins inside `vimrc` and make them ready.
