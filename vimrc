@@ -90,25 +90,25 @@ set shell=pwsh.exe
 " }}}
 
 
-    " PLUGINS ---------------------------------------------------------------- {{{
+" PLUGINS ---------------------------------------------------------------- {{{
 
-    " Plugin code goes here.
+" Plugin code goes here.
 
-    call plug#begin('~/vimfiles/plugged')
+call plug#begin('~/vimfiles/plugged')
 
-        Plug 'dense-analysis/ale'
-        Plug 'preservim/nerdtree'
-        Plug 'github/copilot.vim'
-        Plug 'leafgarland/typescript-vim'
-        Plug 'tpope/vim-fugitive'
-        Plug 'tpope/vim-surround'
-        Plug 'itchyny/lightline.vim'
-        Plug 'nikvdp/ejs-syntax' 
-        Plug 'NLKNguyen/papercolor-theme'
+Plug 'dense-analysis/ale'
+Plug 'preservim/nerdtree'
+Plug 'github/copilot.vim'
+Plug 'leafgarland/typescript-vim'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
+Plug 'itchyny/lightline.vim'
+Plug 'nikvdp/ejs-syntax' 
+Plug 'NLKNguyen/papercolor-theme'
 
-    call plug#end()
+call plug#end()
 
-    " }}}
+" }}}
 
 
 " VIMSCRIPT -------------------------------------------------------------- {{{
