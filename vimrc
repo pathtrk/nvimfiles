@@ -175,7 +175,7 @@ let g:lightline = {
 " Set the semicolon as the leader key.
 let mapleader = ';'
 
-" Press \\ to jump back to the last cursor position.
+" Press ;; to jump back to the last cursor position.
 nnoremap <leader>; ``
 
 " Press \p to print the current file to the default printer from a Linux operating system.
