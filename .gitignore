@@ -2,8 +2,6 @@ autoload
 ftdetect
 ftplugin
 compiler
-
-plugged/*
-!plugged/.keep
+plugged/
 
 *.swp
