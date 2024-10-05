@@ -32,6 +32,8 @@
     "copyFormatting": "none",
     "copyOnSelect": true,
     "defaultProfile": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
+    "initialCols": 133,
+    "initialRows": 44,
     "newTabMenu": [
         {
             "type": "remainingProfiles"
@@ -48,6 +50,7 @@
                 "size": 10.0
             },
             "intenseTextStyle": "all",
+            "scrollbarState": "visible",
             "startingDirectory": "D:\\"
         },
         "list": [
