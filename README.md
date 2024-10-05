@@ -20,4 +20,4 @@ cd $HOME\vimfiles
 .\install-vim-plug.ps1
 ```
 
-Running `:PlugInstall` inside vim editor downloads specified plugins inside `vimrc` and make them ready.
+Running `:PlugInstall` inside vim editor downloads plugins specified in `vimrc` and make them ready.
