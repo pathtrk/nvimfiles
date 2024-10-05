@@ -83,26 +83,32 @@ set wildmode=list:longest
 " Wildmenu will ignore files with these extensions.
 set wildignore=*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx
 
+" Launch Powershell7 when invoked via :shell
+set shell=pwsh.exe
+
+
 " }}}
 
 
-" PLUGINS ---------------------------------------------------------------- {{{
+    " PLUGINS ---------------------------------------------------------------- {{{
 
-" Plugin code goes here.
+    " Plugin code goes here.
 
-call plug#begin('~/vimfiles/plugged')
+    call plug#begin('~/vimfiles/plugged')
 
-    Plug 'dense-analysis/ale'
-    Plug 'preservim/nerdtree'
-    Plug 'github/copilot.vim'
-    Plug 'leafgarland/typescript-vim'
-    Plug 'tpope/vim-fugitive'
-    Plug 'tpope/vim-surround'
-    Plug 'itchyny/lightline.vim'
+        Plug 'dense-analysis/ale'
+        Plug 'preservim/nerdtree'
+        Plug 'github/copilot.vim'
+        Plug 'leafgarland/typescript-vim'
+        Plug 'tpope/vim-fugitive'
+        Plug 'tpope/vim-surround'
+        Plug 'itchyny/lightline.vim'
+        Plug 'nikvdp/ejs-syntax' 
+        Plug 'NLKNguyen/papercolor-theme'
 
-call plug#end()
+    call plug#end()
 
-" }}}
+    " }}}
 
 
 " VIMSCRIPT -------------------------------------------------------------- {{{
@@ -132,8 +138,9 @@ if version >= 703
     set undoreload=10000
 endif
 
-set background=light
-colorscheme lucid
+set background=light        " for the light version
+colorscheme PaperColor
+
 
 " }}}
 
@@ -147,7 +154,7 @@ set laststatus=2
 set noshowmode
 
 let g:lightline = {
-      \ 'colorscheme': 'ayu_light',
+      \ 'colorscheme': 'PaperColor',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ],
@@ -165,8 +172,8 @@ let g:lightline = {
 
 " MAPPINGS --------------------------------------------------------------- {{{
 
-" Set the backslash as the leader key.
-" let mapleader = "\"
+" Set the semicolon as the leader key.
+let mapleader = ';'
 
 " Press \\ to jump back to the last cursor position.
 nnoremap <leader>, ``
@@ -239,5 +246,4 @@ nnoremap <leader>b :NERDTreeToggle<cr>
 
 " Have nerdtree ignore certain files and directories.
 let NERDTreeIgnore=['\.git$', '\.jpg$', '\.mp4$', '\.ogg$', '\.iso$', '\.pdf$', '\.pyc$', '\.odt$', '\.png$', '\.gif$', '\.db$']
-
 " }}}

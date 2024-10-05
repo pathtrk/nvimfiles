@@ -3,6 +3,10 @@
     "$schema": "https://aka.ms/terminal-profiles-schema",
     "actions": [
         {
+            "command": "unbound",
+            "keys": "ctrl+v"
+        },
+        {
             "command": {
                 "action": "copy",
                 "singleLine": false
@@ -10,11 +14,11 @@
             "keys": "ctrl+c"
         },
         {
-            "command": "unbound",
-            "keys": "ctrl+v"
+            "command": "paste"
         },
         {
-            "command": "paste"
+            "command": "find",
+            "keys": "ctrl+shift+f"
         },
         {
             "command": {
@@ -23,10 +27,6 @@
                 "splitMode": "duplicate"
             },
             "keys": "alt+shift+d"
-        },
-        {
-            "command": "find",
-            "keys": "ctrl+shift+f"
         }
     ],
     "copyFormatting": "none",
@@ -44,9 +44,10 @@
             "colorScheme": "Tango Light",
             "cursorShape": "vintage",
             "font": {
-                "face": "IntoneMono Nerd Font",
-                "size": 9.0
+                "face": "Cascadia Mono",
+                "size": 10.0
             },
+            "intenseTextStyle": "all",
             "startingDirectory": "D:\\"
         },
         "list": [
@@ -60,21 +61,27 @@
                 "source": "Windows.Terminal.PowershellCore"
             },
             {
-                "guid": "{f417d7c3-92e4-5e24-9661-b6bd59a184df}",
-                "hidden": false,
-                "name": "Developer Command Prompt for VS 2022",
-                "source": "Windows.Terminal.VisualStudio"
-            },
-            {
-                "guid": "{6edef359-5f8b-5d69-8a7b-c97aebf7b866}",
-                "hidden": false,
-                "name": "Developer PowerShell for VS 2022",
-                "source": "Windows.Terminal.VisualStudio"
-            },
-            {
                 "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
                 "hidden": false,
                 "name": "Command Prompt"
+            },
+            {
+                "antialiasingMode": "cleartype",
+                "colorScheme": "One Half Light",
+                "font": {
+                    "face": "IntoneMono Nerd Font",
+                    "weight": "medium"
+                },
+                "guid": "{5fb123f1-af88-5b5c-8953-d14a8def1978}",
+                "hidden": false,
+                "name": "PowerShell 7",
+                "source": "Windows.Terminal.PowershellCore"
+            },
+            {
+                "guid": "{51855cb2-8cce-5362-8f54-464b92b32386}",
+                "hidden": false,
+                "name": "Ubuntu",
+                "source": "CanonicalGroupLimited.Ubuntu_79rhkp1fndgsc"
             }
         ]
     },
@@ -262,6 +269,29 @@
             "selectionBackground": "#555753",
             "white": "#D3D7CF",
             "yellow": "#C4A000"
+        },
+        {
+            "background": "#300A24",
+            "black": "#171421",
+            "blue": "#0037DA",
+            "brightBlack": "#767676",
+            "brightBlue": "#08458F",
+            "brightCyan": "#2C9FB3",
+            "brightGreen": "#26A269",
+            "brightPurple": "#A347BA",
+            "brightRed": "#C01C28",
+            "brightWhite": "#F2F2F2",
+            "brightYellow": "#A2734C",
+            "cursorColor": "#FFFFFF",
+            "cyan": "#3A96DD",
+            "foreground": "#FFFFFF",
+            "green": "#26A269",
+            "name": "Ubuntu-ColorScheme",
+            "purple": "#881798",
+            "red": "#C21A23",
+            "selectionBackground": "#FFFFFF",
+            "white": "#CCCCCC",
+            "yellow": "#A2734C"
         },
         {
             "background": "#000000",
