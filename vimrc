@@ -105,6 +105,7 @@ Plug 'tpope/vim-surround'
 Plug 'itchyny/lightline.vim'
 Plug 'nikvdp/ejs-syntax' 
 Plug 'NLKNguyen/papercolor-theme'
+Plug 'prisma/vim-prisma'
 
 call plug#end()
 
