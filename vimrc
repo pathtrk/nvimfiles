@@ -153,11 +153,11 @@ colorscheme PaperColor
 set laststatus=2
 
 " Indicataor like -- INSERT -- is unnecessary because the mode information is displayed in the statusline
-" set noshowmode
+set noshowmode
+
+" Settings for vim-airline
 let g:airline_left_sep = ''
-" let g:airline_left_sep = '|'
 let g:airline_right_sep = ''
-" let g:airline_right_sep = '|'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
