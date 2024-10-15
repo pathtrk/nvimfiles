@@ -102,7 +102,8 @@ Plug 'github/copilot.vim'
 Plug 'leafgarland/typescript-vim'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
-Plug 'itchyny/lightline.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'nikvdp/ejs-syntax' 
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'prisma/vim-prisma'
@@ -152,21 +153,17 @@ colorscheme PaperColor
 set laststatus=2
 
 " Indicataor like -- INSERT -- is unnecessary because the mode information is displayed in the statusline
-set noshowmode
-
-let g:lightline = {
-      \ 'colorscheme': 'PaperColor',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ],
-      \   'right': [ [ 'lineinfo' ],
-      \              [ 'percent' ],
-      \              [ 'fileformat', 'fileencoding', 'filetype', 'charvaluehex' ] ]
-      \ },
-      \ 'component_function': {
-      \   'gitbranch': 'FugitiveHead'
-      \ },
-      \ }
+" set noshowmode
+let g:airline_left_sep = ''
+" let g:airline_left_sep = '|'
+let g:airline_right_sep = ''
+" let g:airline_right_sep = '|'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline_powerline_fonts = 1
+let g:airline_theme='transparent'
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 
 " }}}
 
