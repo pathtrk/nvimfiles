@@ -2,6 +2,7 @@ autoload
 ftdetect
 ftplugin
 compiler
-plugged/
+bundle/
+pack/
 
 *.swp

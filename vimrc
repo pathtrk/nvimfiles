@@ -84,7 +84,7 @@ set wildmode=list:longest
 set wildignore=*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx
 
 " Launch Powershell7 when invoked via :shell
-set shell=pwsh.exe
+" set shell=pwsh.exe
 
 
 " }}}
@@ -92,23 +92,29 @@ set shell=pwsh.exe
 
 " PLUGINS ---------------------------------------------------------------- {{{
 
-" Plugin code goes here.
+filetype off
+set shellslash
+set rtp+=~/vimfiles/bundle/Vundle.vim
 
-call plug#begin('~/vimfiles/plugged')
+call vundle#begin('~/vimfiles/bundle')
 
-Plug 'dense-analysis/ale'
-Plug 'preservim/nerdtree'
-Plug 'github/copilot.vim'
-Plug 'leafgarland/typescript-vim'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-surround'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'nikvdp/ejs-syntax' 
-Plug 'NLKNguyen/papercolor-theme'
-Plug 'prisma/vim-prisma'
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'dense-analysis/ale'
+Plugin 'preservim/nerdtree'
+Plugin 'github/copilot.vim'
+Plugin 'leafgarland/typescript-vim'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-commentary'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'nikvdp/ejs-syntax'
+Plugin 'NLKNguyen/papercolor-theme'
+Plugin 'prisma/vim-prisma'
 
-call plug#end()
+
+call vundle#end()            " required
+filetype plugin indent on    " required
 
 " }}}
 
@@ -127,10 +133,25 @@ augroup END
 " zc to close the fold under the cursor.
 " zR to open all folds.
 " zM to close all folds.
-"
 
-" If the current file type is HTML, set indentation to 2 spaces.
-autocmd Filetype html setlocal tabstop=2 shiftwidth=2 expandtab
+" Ale related settings.
+"
+let g:ale_fix_on_save = 1 " Format on save.
+let g:ale_python_auto_virtualenv = 1
+
+" Enable Ale fixers for TypeScript, Python, HTML, JavaScript, C, and C++.
+let b:ale_fixers = {
+    \ 'typescript': ['prettier'],
+    \ 'python': ['black', 'autoflake', 'isort'],
+    \ 'html': ['prettier'],
+    \ 'javascript': ['prettier'],
+    \ 'cpp': ['clang-format'],
+    \ 'c': ['clang-format'],
+    \ '*': ['remove_trailing_lines', 'trim_whitespace']
+    \ }
+
+" Whatever the file type is, set indentation to 4 spaces by default.
+autocmd FileType * setlocal tabstop=4 shiftwidth=4 expandtab
 
 " If Vim version is equal to or greater than 7.3 enable undofile.
 " This allows you to undo changes to a file even after saving it.
@@ -142,7 +163,8 @@ endif
 
 set background=light        " for the light version
 colorscheme PaperColor
-
+highlight Normal ctermbg=NONE guibg=NONE
+highlight NonText ctermbg=NONE guibg=NONE
 
 " }}}
 
@@ -164,6 +186,8 @@ let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline_powerline_fonts = 1
 let g:airline_theme='transparent'
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+let g:airline#extensions#ale#enabled = 1
+
 
 " }}}
 
@@ -184,6 +208,9 @@ nnoremap <silent> <leader>p :%w !lp<CR>
 
 " Type jj to exit insert mode quickly.
 imap jj <Esc>
+
+" Comment/uncomment with ctrl+/
+noremap <c-/> :Commentary<cr>
 
 " Press the space bar to type the : character in command mode.
 nnoremap <space> :
@@ -231,12 +258,17 @@ nnoremap <c-k> <c-w>k
 nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
 
+nnoremap <c-left> :bprevious<CR>
+nnoremap <c-right> :bnext<CR>
+nnoremap <c-up> :bfirst<CR>
+nnoremap <c-down> :blast<CR>
+
 " Resize split windows using arrow keys by pressing:
 " CTRL+UP, CTRL+DOWN, CTRL+LEFT, or CTRL+RIGHT.
-noremap <c-up> <c-w>+
-noremap <c-down> <c-w>-
-noremap <c-left> <c-w>>
-noremap <c-right> <c-w><
+noremap <m-up> <c-w>+
+noremap <m-down> <c-w>-
+noremap <m-left> <c-w>>
+noremap <m-right> <c-w><
 
 " NERDTree specific mappings.
 " Map the F3 key to toggle NERDTree open and close.
