@@ -92,7 +92,7 @@ set wildignore=*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx
 
 " PLUGINS ---------------------------------------------------------------- {{{
 
-filetype off
+" filetype off
 set shellslash
 set rtp+=~/vimfiles/bundle/Vundle.vim
 
@@ -133,25 +133,19 @@ augroup END
 " zc to close the fold under the cursor.
 " zR to open all folds.
 " zM to close all folds.
-
+"
+"
 " Ale related settings.
 "
 let g:ale_fix_on_save = 1 " Format on save.
 let g:ale_python_auto_virtualenv = 1
 
 " Enable Ale fixers for TypeScript, Python, HTML, JavaScript, C, and C++.
-let b:ale_fixers = {
+let g:ale_fixers = {
     \ 'typescript': ['prettier'],
-    \ 'python': ['black', 'autoflake', 'isort'],
-    \ 'html': ['prettier'],
     \ 'javascript': ['prettier'],
-    \ 'cpp': ['clang-format'],
-    \ 'c': ['clang-format'],
-    \ '*': ['remove_trailing_lines', 'trim_whitespace']
+    \ 'python': ['black', 'autoflake', 'isort']
     \ }
-
-" Whatever the file type is, set indentation to 4 spaces by default.
-autocmd FileType * setlocal tabstop=4 shiftwidth=4 expandtab
 
 " If Vim version is equal to or greater than 7.3 enable undofile.
 " This allows you to undo changes to a file even after saving it.
@@ -161,10 +155,8 @@ if version >= 703
     set undoreload=10000
 endif
 
-set background=light        " for the light version
+set background=dark       " for the light version
 colorscheme PaperColor
-highlight Normal ctermbg=NONE guibg=NONE
-highlight NonText ctermbg=NONE guibg=NONE
 
 " }}}
 
