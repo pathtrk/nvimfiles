@@ -2,7 +2,8 @@ autoload
 ftdetect
 ftplugin
 compiler
-bundle/
 pack/
+bundle/
+!bundle/Vundle.vim
 
 *.swp

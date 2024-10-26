@@ -94,9 +94,14 @@ set wildignore=*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx
 
 " filetype off
 set shellslash
-set rtp+=~/vimfiles/bundle/Vundle.vim
+if has('win32')
+    set rtp+=~/vimfiles/bundle/Vundle.vim
+    call vundle#begin('~/vimfiles/bundle')
+else
+    set rtp+=~/.vim/bundle/Vundle.vim
+    call vundle#begin('~/.vim/bundle')
+endif
 
-call vundle#begin('~/vimfiles/bundle')
 
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'dense-analysis/ale'

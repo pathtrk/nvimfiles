@@ -7,17 +7,26 @@ Setting files for vim on Windows
 - Windows 11 (might work with Windows 10, but not tested)
 - Powershell 7.4.5 or later
 
-## Install
+## Cloning this repo
+
+On Windows 11:
 
 ```powershell
-git clone git@github.com:pathtrk/vimfiles.git $HOME\vimfiles  
+git clone --recurse-submodules git@github.com:pathtrk/vimfiles.git $HOME\vimfiles  
 ```
 
-`install-vim-plug.ps1` script installs [vim-plug](https://github.com/junegunn/vim-plug) for plugin management.
+On Wsl or Linux:
 
-```powershell
-cd $HOME\vimfiles
-.\install-vim-plug.ps1
+```bash
+git clone --recurse-submodules git@github.com:pathtrk/vimfiles.git $HOME\.vim
 ```
 
-Running `:PlugInstall` inside vim editor downloads plugins specified in `vimrc` and makes them ready.
+## Installing plugins via Vundle
+
+Running
+
+```
+vim PluginInstall +qall
+```
+
+from the terminal downloads plugins specified in `vimrc` and makes them ready.
