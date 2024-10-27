@@ -18,12 +18,12 @@ git clone --recurse-submodules git@github.com:pathtrk/vimfiles.git $HOME\vimfile
 On Wsl or Linux:
 
 ```bash
-git clone --recurse-submodules git@github.com:pathtrk/vimfiles.git $HOME\.vim
+git clone --recurse-submodules git@github.com:pathtrk/vimfiles.git $HOME/.vim
 ```
 
 ## Installing plugins via Vundle
 
-Launch and run the following from vim editor: 
+Launch vim and run the following from the editor: 
 
 ```
 PluginInstall
