@@ -23,10 +23,10 @@ git clone --recurse-submodules git@github.com:pathtrk/vimfiles.git $HOME\.vim
 
 ## Installing plugins via Vundle
 
-Running
+Launch and run the following from vim editor: 
 
 ```
-vim PluginInstall +qall
+PluginInstall
 ```
 
-from the terminal downloads plugins specified in `vimrc` and makes them ready.
+This downloads plugins specified in `vimrc` and makes them ready.
