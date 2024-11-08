@@ -3,8 +3,11 @@
 " Disable compatibility with vi which can cause unexpected issues.
 set nocompatible
 
-"Turn off bell
+" Turn off bell
 set belloff=all
+
+" Enable mouse click support
+set mouse=a
 
 " Support true colors
 set termguicolors
@@ -83,8 +86,8 @@ set wildmode=list:longest
 " Wildmenu will ignore files with these extensions.
 set wildignore=*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx
 
-" Launch Powershell7 when invoked via :shell
-" set shell=pwsh.exe
+" Use html binding for ejs files
+au BufNewFile,BufRead *.ejs set filetype=html
 
 
 " }}}
@@ -113,7 +116,6 @@ Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-commentary'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-Plugin 'nikvdp/ejs-syntax'
 Plugin 'NLKNguyen/papercolor-theme'
 Plugin 'prisma/vim-prisma'
 
