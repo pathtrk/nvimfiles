@@ -163,7 +163,7 @@ if version >= 703
 endif
 
 set background=dark       " for the light version
-colorscheme PaperColor
+colorscheme wildcharm
 
 " }}}
 
