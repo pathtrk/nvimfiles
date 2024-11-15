@@ -193,11 +193,11 @@ let g:airline#extensions#ale#enabled = 1
 
 " MAPPINGS --------------------------------------------------------------- {{{
 
-" Set the semicolon as the leader key.
-let mapleader = ';'
+" Set the semicomma as the leader key.
+let mapleader = ','
 
-" Press ;; to jump back to the last cursor position.
-nnoremap <leader>; ``
+" Press ,, to jump back to the last cursor position.
+nnoremap <leader>, ``
 
 " Press \p to print the current file to the default printer from a Linux operating system.
 " View available printers:   lpstat -v
@@ -214,17 +214,9 @@ noremap <c-/> :Commentary<cr>
 " Press the space bar to type the : character in command mode.
 nnoremap <space> :
 
-" Pressing the letter o will open a new line below the current one.
-" Exit insert mode after creating a new line above or below the current line.
-nnoremap o o<esc>
-nnoremap O O<esc>
-
 " Center the cursor vertically when moving to the next word during a search.
 nnoremap n nzz
 nnoremap N Nzz
-
-" Yank from cursor to the end of line.
-nnoremap Y y$
 
 " Yank all the content with ya
 nnoremap ya ggVG"*y<C-O>
@@ -232,22 +224,24 @@ nnoremap ya ggVG"*y<C-O>
 " Clipboard yank and paste
 "
 " Yank all the content with ,ya
-nnoremap ,ya ggVG"*y<C-O>
+nnoremap <leader>ya ggVG"*y<C-O>
 "
 " Yank a whole line in normal mode, copy selected in visual mode
-nnoremap ,y "*yy
-vnoremap ,y "*y
+nnoremap <leader>y "*yy
+vnoremap <leader>y "*y
 "
-" Yank a whole line in normal mode, copy selected in visual mode
-nnoremap ,p  "*p
-nnoremap ,p  "*p
+" Paste text in either normal or visual mode
+nnoremap <leader>p  "*p
+vnoremap <leader>p  "*p
 
 " Map the F5 key to run a Python script inside Vim.
 " I map F5 to a chain of commands here.
+"
 " :w saves the file.
 " <CR> (carriage return) is like pressing the enter key.
 " !clear runs the external clear screen command.
-" !python3 % executes the current file with Python.
+" !python3 % executes the current file with Python
+"
 nnoremap <f5> :w <CR>:!clear <CR>:!python3 % <CR>
 
 " You can split the window in Vim by typing :split or :vsplit.
