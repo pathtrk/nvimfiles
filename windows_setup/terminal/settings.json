@@ -78,7 +78,7 @@
                 "startingDirectory": "~"
             },
             {
-                "commandline": "C:\\msys64\\msys2_shell.cmd -mingw64 -defterm -no-start -shell fish",
+                "commandline": "C:\\msys64\\msys2_shell.cmd -clang64 -defterm -here -no-start -use-full-path -shell fish",
                 "guid": "{f419ec7d-70ab-4d73-be6d-3b688174cb27}",
                 "hidden": false,
                 "name": "Msys - Fish"
