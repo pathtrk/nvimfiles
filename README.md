@@ -1,5 +1,5 @@
 # vimfiles
-Setting files for vim on Windows
+Setting files for vim on Windows (or Linux)
 
 ## Prerequisites
 
