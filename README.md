@@ -1,6 +1,9 @@
 # vimfiles
 Setting files for vim on Windows (or Linux)
 
+<img src="https://github.com/user-attachments/assets/4d4b13a0-1f3e-4013-9413-9c7ef9b37884" width="760">
+
+
 ## Prerequisites
 
 - vim 9.1 or later
@@ -21,12 +24,6 @@ For Msys2, or bash on Ubuntu (including WSL2):
 git clone --recurse-submodules git@github.com:pathtrk/vimfiles.git $HOME/.vim
 ```
 
-## Applying the saved settings for Windows Terminal
-
-Place `windows_setup/terminal/settings.json` into your settings directory of Wndows Teminal app.
-
-Otherwise you can copy the file contents and paste into your `settings.json` that can be opened from Windows Terminal's settings menu, then save yours.
-
 ## Installing plugins via Vundle
 
 Launch vim and run the following from the editor: 
@@ -37,7 +34,15 @@ PluginInstall
 
 This downloads plugins specified in `vimrc` and makes them ready.
 
-## Install vim for Msys2
+## Appendix
+
+### Applying the saved settings for Windows Terminal
+
+Place `windows_setup/terminal/settings.json` into your settings directory of Wndows Teminal app.
+
+Otherwise you can copy the file contents and paste into your `settings.json` that can be opened from Windows Terminal's settings menu, then save yours.
+
+### Install vim for Msys2
 
 ```bash
 pacman -Syu
@@ -46,7 +51,7 @@ pacman -S vim
 
 You might not need the first line of these commands.
 
-## Build vim from source
+### Build vim from source
 
 Ubuntu does not have the latest version of vim. To build vim from source, follow the steps below:
 
