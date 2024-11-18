@@ -194,10 +194,10 @@ let g:airline#extensions#ale#enabled = 1
 " MAPPINGS --------------------------------------------------------------- {{{
 
 " Set the semicomma as the leader key.
-let mapleader = ','
+let mapleader = ';'
 
 " Press ,, to jump back to the last cursor position.
-nnoremap <leader>, ``
+nnoremap <leader>; ``
 
 " Press \p to print the current file to the default printer from a Linux operating system.
 " View available printers:   lpstat -v
