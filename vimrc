@@ -154,6 +154,8 @@ let g:ale_fixers = {
     \ 'python': ['black', 'autoflake', 'isort']
     \ }
 
+let b:ale_javascript_prettier_options = '--tab-width 4 --single-quote'
+
 " If Vim version is equal to or greater than 7.3 enable undofile.
 " This allows you to undo changes to a file even after saving it.
 if version >= 703
@@ -258,10 +260,10 @@ nnoremap <c-down> :blast<CR>
 
 " Resize split windows using arrow keys by pressing:
 " CTRL+UP, CTRL+DOWN, CTRL+LEFT, or CTRL+RIGHT.
-noremap <m-up> <c-w>+
-noremap <m-down> <c-w>-
-noremap <m-left> <c-w>>
-noremap <m-right> <c-w><
+noremap <c-s-up> <c-w>+
+noremap <c-s-down> <c-w>-
+noremap <c-s-left> <c-w>>
+noremap <c-s-right> <c-w><
 
 " NERDTree specific mappings.
 " Map the F3 key to toggle NERDTree open and close.

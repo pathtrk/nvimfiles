@@ -1,7 +1,0 @@
-#
-# Make Wsl to remember ssh passphrase of `~/.ssh/id_rsa`, first run:
-#   sudo apt install keychain
-# then, append the following two lines to .bashrc
-#
-/usr/bin/keychain --nogui ~/.ssh/id_rsa
-source /home/ryosuke/.keychain/`hostname`-sh
