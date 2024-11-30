@@ -149,8 +149,10 @@ let g:ale_python_auto_virtualenv = 1
 
 " Enable Ale fixers for TypeScript, Python, HTML, JavaScript, C, and C++.
 let g:ale_fixers = {
-    \ 'typescript': ['prettier'],
-    \ 'javascript': ['prettier'],
+    \ '*': ['remove_trailing_lines', 'trim_whitespace'],
+    \ 'html': ['prettier'],
+    \ 'javascript': ['eslint', 'prettier'],
+    \ 'typescript': ['eslint', 'prettier'],
     \ 'python': ['black', 'autoflake', 'isort']
     \ }
 
