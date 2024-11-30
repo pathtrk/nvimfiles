@@ -7,7 +7,7 @@ set nocompatible
 set belloff=all
 
 " Enable mouse click support
-set mouse=a
+set mouse=v
 
 " Support true colors
 set termguicolors
@@ -211,7 +211,7 @@ nnoremap <silent> <leader>p :%w !lp<CR>
 imap jj <Esc>
 
 " Comment/uncomment with ctrl+/
-noremap <c-/> :Commentary<cr>
+noremap ,/ :Commentary<cr>
 
 " Press the space bar to type the : character in command mode.
 nnoremap <space> :
@@ -220,21 +220,18 @@ nnoremap <space> :
 nnoremap n nzz
 nnoremap N Nzz
 
-" Yank all the content with ya
-nnoremap ya ggVG"*y<C-O>
-
 " Clipboard yank and paste
 "
 " Yank all the content with ,ya
-nnoremap <leader>ya ggVG"*y<C-O>
+nnoremap ,ya ggVG"+y<C-O>
 "
 " Yank a whole line in normal mode, copy selected in visual mode
-nnoremap <leader>y "*yy
-vnoremap <leader>y "*y
+nnoremap ,y "+y
+vnoremap ,y "+y
 "
 " Paste text in either normal or visual mode
-nnoremap <leader>p  "*p
-vnoremap <leader>p  "*p
+nnoremap ,p  "+p
+vnoremap ,p  "+p
 
 " Map the F5 key to run a Python script inside Vim.
 " I map F5 to a chain of commands here.
