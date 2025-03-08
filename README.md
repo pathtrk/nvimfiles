@@ -1,38 +1,55 @@
 # vimfiles
-Setting files for vim on Windows (or Linux)
+Setting files for vim on Windows, Linux or macOS
 
 <img src="https://github.com/user-attachments/assets/4d4b13a0-1f3e-4013-9413-9c7ef9b37884" width="760">
 
 
 ## Prerequisites
 
-- vim 9.1 or later
-- Windows 11 or Ubuntu 22.04
-- Powershell 7.4.5+, Msys2 or WSL2 for Windows 11
+- vim 9.1 or later with
+  - Msys2 or PowerShell on 7.4.5+ Windows 11
+  - Ubuntu 22.04
+- latest nvim, for macOS
 
 ## Cloning this repo
 
 For PowerShell:
 
 ```powershell
-git clone --recurse-submodules git@github.com:pathtrk/vimfiles.git $HOME\vimfiles  
+git clone --recurse-submodules git@github.com:pathtrk/vimfiles.git $HOME\vimfiles
 ```
 
-For Msys2, or bash on Ubuntu (including WSL2):
+For Msys2, bash on Ubuntu or macOS:
 
 ```bash
 git clone --recurse-submodules git@github.com:pathtrk/vimfiles.git $HOME/.vim
 ```
 
-## Installing plugins via Vundle
+For macOS, copy the configuration for nvim:
 
-Launch vim and run the following from the editor: 
+```bash
+setup/mac/install-nvim.sh
+```
+
+This will create ~/.config/nvim directory and copy and place init.vim there.
+
+## Installing plugins via Vundle (for Windows)
+
+Launch vim and run the following from the editor:
 
 ```
 PluginInstall
 ```
 
 This downloads plugins specified in `vimrc` and makes them ready.
+
+## Installing plugins via VimPlug (for nvim/macOS)
+
+Alternatively, run the following from nvim.
+
+```
+PlugInstall
+```
 
 ## Appendix
 
@@ -70,13 +87,12 @@ Then edit `src/Makefile` and uncomment the following line:
 ```makefile
 CONF_OPT_GUI = --disable-gui   #L321
 CONF_OPT_PYTHON3 = --enable-python3interp  # L453
-CONF_OPT_CSCOPE = --enable-cscope    # L465 
+CONF_OPT_CSCOPE = --enable-cscope    # L465
 ```
 
 Lastly, run the following:
 
 ```bash
-make 
+make
 sudo make install
 ```
-
