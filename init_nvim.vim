@@ -8,7 +8,7 @@ set nocompatible
 set belloff=all
 
 " Enable mouse click support
-set mouse=v
+set mouse=a
 
 " Support true colors
 set termguicolors
