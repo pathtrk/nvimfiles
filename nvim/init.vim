@@ -25,8 +25,16 @@ filetype indent on
 " Turn syntax highlighting on.
 syntax on
 
-" Add numbers to each line on the left-hand side.
+" Show line numbers by default in normal buffers
 set number
+
+" Hide line numbers only in terminal buffers
+augroup TerminalSettings
+    autocmd!
+    autocmd TermOpen * setlocal nonumber norelativenumber
+    autocmd BufEnter term://* setlocal nonumber norelativenumber
+    autocmd BufLeave term://* setlocal number
+augroup END
 
 " Make the backspace work like in most other programs
 set backspace=indent,eol,start
