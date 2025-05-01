@@ -4,6 +4,4 @@ ftplugin
 compiler
 pack/
 bundle/
-!bundle/Vundle.vim
-
 *.swp
