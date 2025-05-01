@@ -1,4 +1,3 @@
-local lspconfig = require('lspconfig')
 local coq = require('coq')
 local cmp = require('cmp')
 
@@ -59,14 +58,14 @@ cmp.setup.cmdline(':', {
 -- Set up lspconfig.
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-lspconfig.pyright.setup{}
+require('lspconfig').pyright.setup{}
 
-lspconfig.clangd.setup({
+vim.lsp.config('clangd', {
     cmd = {'clangd', '--background-index', '--clang-tidy', '--log=verbose'},
     init_options = { fallbackFlags = { '-std=c++17' }, },
 })
 
-lspconfig.eslint.setup({
+vim.lsp.config('eslint', {
     settings = {
         packageManager = 'npm'
     },
@@ -79,15 +78,19 @@ lspconfig.eslint.setup({
     end,
 })
 
-lspconfig.ts_ls.setup({
+vim.lsp.config('ts_ls', {
+  init_options = {
+    plugins = {},
+  },
+  filetypes = {
+    "javascript",
+    "typescript",
+  },
+})
+
+vim.lsp.config('rust_analyzer', {
+  -- Server-specific settings. See `:help lsp-quickstart`
   settings = {
-    tsserver_file_preferences = {
-      includeInlayParameterNameHints = "all",
-      includeCompletionsForModuleExports = true,
-      quotePreference = "auto",
-    },
-    tsserver_locale = "en",
-    complete_function_calls = true,
-    include_completions_with_insert_text = true,
+    ['rust-analyzer'] = {},
   },
 })
