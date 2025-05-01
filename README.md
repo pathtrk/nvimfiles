@@ -1,8 +1,7 @@
-# vimfiles
-Setting files for vim on Windows, Linux or macOS
+# nvimfiles
+Setting files for neovim on macOS/Linux
 
-<img src="https://github.com/user-attachments/assets/4d4b13a0-1f3e-4013-9413-9c7ef9b37884" width="760">
-
+<img width="760" alt="screen shot" src="https://github.com/user-attachments/assets/1924344a-7154-465c-bb0b-5da9df549d22" />
 
 ## Prerequisites
 
