@@ -1,7 +1,2 @@
-autoload
-ftdetect
-ftplugin
-compiler
-pack/
-bundle/
 *.swp
+lazy-lock.json
