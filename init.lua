@@ -15,6 +15,16 @@ vim.opt.signcolumn = "yes"
 -- Key mappings
 vim.keymap.set('i', 'jj', '<Esc>', { noremap = true, silent = true })
 
+-- Auto-delete trailing whitespaces
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = "*",
+  callback = function()
+    local save_cursor = vim.fn.getpos(".")
+    vim.cmd([[%s/\s\+$//e]])
+    vim.fn.setpos(".", save_cursor)
+  end,
+})
+
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -198,6 +208,7 @@ require("lazy").setup({
   {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
+    dependencies = { "OXY2DEV/markview.nvim" },
     config = function()
       require("nvim-treesitter.configs").setup({
         ensure_installed = {
@@ -241,12 +252,6 @@ require("lazy").setup({
     lazy = false,
     -- For `nvim-treesitter` users.
     priority = 49,
-
-    -- For blink.cmp's completion
-    -- source
-    -- dependencies = {
-    --     "saghen/blink.cmp"
-    -- },
   },
 
   -- Linting
@@ -269,6 +274,16 @@ require("lazy").setup({
         end,
       })
     end,
+  },
+
+  {
+    "rachartier/tiny-inline-diagnostic.nvim",
+    event = "VeryLazy",
+    priority = 1000,
+    config = function()
+        require('tiny-inline-diagnostic').setup()
+        vim.diagnostic.config({ virtual_text = false }) -- Disable default virtual text
+    end
   },
 
   -- File explorer
