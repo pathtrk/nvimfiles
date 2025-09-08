@@ -12,6 +12,8 @@ vim.opt.termguicolors = true
 vim.opt.updatetime = 250
 vim.opt.signcolumn = "yes"
 
+vim.cmd("language en_US")
+
 -- Key mappings
 vim.keymap.set('i', 'jj', '<Esc>', { noremap = true, silent = true })
 
@@ -111,13 +113,13 @@ require("lazy").setup({
       })
 
       local lspconfig = require("lspconfig")
-      
+
       -- Python
       lspconfig.pyright.setup({})
-      
+
       -- TypeScript
       lspconfig.ts_ls.setup({})
-      
+
       -- C/C++
       lspconfig.clangd.setup({})
 
@@ -259,7 +261,7 @@ require("lazy").setup({
     "mfussenegger/nvim-lint",
     config = function()
       local lint = require("lint")
-      
+
       lint.linters_by_ft = {
         python = { "flake8" },
         typescript = { "eslint" },
