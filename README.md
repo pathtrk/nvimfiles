@@ -8,7 +8,7 @@ Setting files for neovim on macOS/Linux
 For macOS/Linux:
 ```bash
 git clone git@github.com:pathtrk/nvimfiles.git
-ln -s nvimfiles $HOME/.config/nvim/
+ln -s nvimfiles $HOME/.config/nvim
 ```
 This will link this repo to ~/.config/nvim directory and the config is ready to be loaded.
 
