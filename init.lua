@@ -11,11 +11,13 @@ vim.opt.smartcase = true
 vim.opt.termguicolors = true
 vim.opt.updatetime = 250
 vim.opt.signcolumn = "yes"
-
+vim.opt.encoding = 'utf-8'
+vim.opt.fileencoding = 'utf-8'
 vim.cmd("language en_US")
 
 -- Key mappings
 vim.keymap.set('i', 'jj', '<Esc>', { noremap = true, silent = true })
+vim.keymap.set('t', 'jj', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
 -- Auto-delete trailing whitespaces
 vim.api.nvim_create_autocmd("BufWritePre", {
@@ -263,7 +265,7 @@ require("lazy").setup({
       local lint = require("lint")
 
       lint.linters_by_ft = {
-        python = { "flake8" },
+        python = { "ruff" },
         typescript = { "eslint" },
         javascript = { "eslint" },
         c = { "cppcheck" },
