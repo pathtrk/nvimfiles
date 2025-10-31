@@ -96,31 +96,23 @@ require("lazy").setup({
 
   -- LSP Configuration
   {
+    "mason-org/mason.nvim",
+    opts = {
+        ui = {
+            icons = {
+                package_installed = "?",
+                package_pending = "?",
+                package_uninstalled = "?"
+            }
+        }
+    }
+  },
+  {
     "neovim/nvim-lspconfig",
-    dependencies = {
-      "williamboman/mason.nvim",
-      "williamboman/mason-lspconfig.nvim",
-    },
     config = function()
-      require("mason").setup()
-      require("mason-lspconfig").setup({
-        ensure_installed = {
-          "pyright",       -- Python
-          "ts_ls",         -- TypeScript
-          "clangd",        -- C/C++
-        },
-      })
-
-      local lspconfig = require("lspconfig")
-
-      -- Python
-      lspconfig.pyright.setup({})
-
-      -- TypeScript
-      lspconfig.ts_ls.setup({})
-
-      -- C/C++
-      lspconfig.clangd.setup({})
+      vim.lsp.enable('pyright')
+      vim.lsp.enable('ts_ls')
+      vim.lsp.enable('clangd')
 
       -- Global mappings
       vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
