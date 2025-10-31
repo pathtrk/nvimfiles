@@ -22,10 +22,29 @@ opt.sessionoptions:remove('options') -- don't save keymaps and local options
 opt.foldlevelstart = 99 -- no auto folding
 
 vim.cmd("language en_US")
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
 -- Key mappings
-vim.keymap.set('i', 'jj', '<Esc>', { noremap = true, silent = true })
-vim.keymap.set('t', 'jj', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
+local function map(mode, lhs, rhs, desc, opts)
+  opts = opts or {}
+  opts.desc = desc
+  vim.keymap.set(mode, lhs, rhs, opts)
+end
+
+map('i', 'jj', '<Esc>', '', { noremap = true, silent = true })
+map('t', '<Esc>', '<C-\\><C-n>', 'Exit terminal mode')
+map('n', '<leader>pa', 'ggVGp', "select all and paste")
+map('n', '<leader>sa', 'ggVG',  "select all")
+map("n", "<leader>/", ":nohl<CR>", 'Remove highlight')
+map("n", "<leader>t", ":terminal<CR>", "Open terminal")
+map("n", "<leader>Tsv", ":vsp term://", "Open vertical terminal split")
+map("n", "<leader>Tsh", ":sp term://", "Open horizontal terminal split")
+map("n", "L", "vg_", "Select to end of line")
+map('', '<leader>y', '"+y', 'Yank to clipboard') -- E.g: <leader>yy will yank current line to os clipboard
+map('', '<leader>Y', '"+y$', 'Yank until EOL to clipboard')
+map('n', '<leader>p', '"+p', 'Paste after cursor from clipboard')
+map('n', '<leader>P', '"+P', 'Paste before cursor from clipboard')
 
 -- Auto-delete trailing whitespaces
 vim.api.nvim_create_autocmd("BufWritePre", {
