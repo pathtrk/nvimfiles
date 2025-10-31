@@ -1,18 +1,26 @@
 -- Basic Neovim settings
-vim.opt.number = true
-vim.opt.relativenumber = true
-vim.opt.expandtab = true
-vim.opt.shiftwidth = 2
-vim.opt.tabstop = 2
-vim.opt.smartindent = true
-vim.opt.wrap = false
-vim.opt.ignorecase = true
-vim.opt.smartcase = true
-vim.opt.termguicolors = true
-vim.opt.updatetime = 250
-vim.opt.signcolumn = "yes"
-vim.opt.encoding = 'utf-8'
-vim.opt.fileencoding = 'utf-8'
+local opt = vim.opt
+
+opt.number = true
+opt.relativenumber = true
+opt.autoindent = true -- Indent automatically
+opt.cursorline = true -- Enables cursor line
+opt.expandtab = true
+opt.shiftwidth = 2
+opt.tabstop = 2
+opt.smartindent = true
+opt.wrap = true
+opt.ignorecase = true
+opt.smartcase = true
+opt.termguicolors = true
+opt.updatetime = 250
+opt.signcolumn = "yes"
+opt.encoding = 'utf-8'
+opt.fileencoding = 'utf-8'
+opt.formatoptions:append('cro') -- continue comments when going down a line, hit C-u to remove the added comment prefix
+opt.sessionoptions:remove('options') -- don't save keymaps and local options
+opt.foldlevelstart = 99 -- no auto folding
+
 vim.cmd("language en_US")
 
 -- Key mappings
