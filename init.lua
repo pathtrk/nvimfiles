@@ -110,9 +110,12 @@ require("lazy").setup({
   {
     "neovim/nvim-lspconfig",
     config = function()
+      local lspconfig = require("lspconfig")
+
       vim.lsp.enable('pyright')
       vim.lsp.enable('ts_ls')
       vim.lsp.enable('clangd')
+      vim.lsp.enable('omnisharp')
 
       -- Global mappings
       vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
@@ -211,6 +214,7 @@ require("lazy").setup({
           "javascript",
           "c",
           "cpp",
+          "c_sharp",
           "html",
           "css",
           "json",
@@ -259,6 +263,7 @@ require("lazy").setup({
         javascript = { "eslint" },
         c = { "cppcheck" },
         cpp = { "cppcheck" },
+        csharp = { "omnisharp" },  -- OmniSharp LSP provides diagnostics
       }
 
       vim.api.nvim_create_autocmd({ "BufWritePost" }, {
