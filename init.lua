@@ -92,7 +92,7 @@ require("lazy").setup({
 
   -- Color schemes
   { "EdenEast/nightfox.nvim" },
-  { "ntk148v/habamax.nvim", dependencies={ "rktjmp/lush.nvim" } },
+  { "ellisonleao/gruvbox.nvim", priority = 1000 , config = true, opts = { contrast = "soft" } },
 
   -- LSP Configuration
   {
@@ -324,4 +324,4 @@ require("lazy").setup({
   },
 })
 
-vim.cmd("colorscheme carbonfox")
+vim.cmd("colorscheme lunaperche")
