@@ -25,6 +25,8 @@ vim.cmd("language en_US")
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+vim.treesitter.language.register('html', 'ejs')
+
 -- Key mappings
 local function map(mode, lhs, rhs, desc, opts)
   opts = opts or {}
