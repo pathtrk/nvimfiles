@@ -33,7 +33,7 @@ local function map(mode, lhs, rhs, desc, opts)
 end
 
 map('i', 'jj', '<Esc>', '', { noremap = true, silent = true })
-map('t', '<Esc>', '<C-\\><C-n>', 'Exit terminal mode')
+map('t', '<C-;>', '<C-\\><C-n>', 'Exit terminal mode', { noremap = true, silent = true })
 map('n', '<leader>pa', 'ggVGp', "select all and paste")
 map('n', '<leader>sa', 'ggVG',  "select all")
 map("n", "<leader>/", ":nohl<CR>", 'Remove highlight')
