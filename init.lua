@@ -2,54 +2,100 @@
 local opt = vim.opt
 
 opt.number = true
+opt.wrap = true
 opt.relativenumber = true
+opt.scrolloff = 8        -- Keep 8 lines visible when scrolling
+opt.sidescrolloff = 8    -- Keep 8 columns visible
+
+opt.smartindent = true
 opt.autoindent = true -- Indent automatically
 opt.cursorline = true -- Enables cursor line
+opt.shiftwidth = 4
+opt.tabstop = 4
+opt.softtabstop = 4
 opt.expandtab = true
-opt.shiftwidth = 2
-opt.tabstop = 2
-opt.smartindent = true
-opt.wrap = true
 opt.ignorecase = true
 opt.smartcase = true
 opt.termguicolors = true
 opt.updatetime = 250
 opt.signcolumn = "yes"
-opt.encoding = 'utf-8'
-opt.fileencoding = 'utf-8'
 opt.formatoptions:append('cro') -- continue comments when going down a line, hit C-u to remove the added comment prefix
 opt.sessionoptions:remove('options') -- don't save keymaps and local options
 opt.foldlevelstart = 99 -- no auto folding
 
+opt.clipboard = 'unnamedplus'  -- System clipboard
+opt.undofile = true
+opt.undodir = vim.fn.expand('~/.config/nvim/undo')
+vim.fn.mkdir(vim.fn.expand('~/.config/nvim/undo'), 'p')
+opt.backup = false
+opt.writebackup = false
+opt.swapfile = false
+
+-- Language and encoding
+opt.encoding = 'utf-8'
+opt.fileencoding = 'utf-8'
 vim.cmd("language en_US")
+
+-- Key mappings
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
-vim.treesitter.language.register('html', 'ejs')
-
--- Key mappings
 local function map(mode, lhs, rhs, desc, opts)
   opts = opts or {}
   opts.desc = desc
   vim.keymap.set(mode, lhs, rhs, opts)
 end
 
-map('i', 'jj', '<Esc>', '', { noremap = true, silent = true })
-map('t', '<C-;>', '<C-\\><C-n>', 'Exit terminal mode', { noremap = true, silent = true })
+-- Window navigation (you might conflict with your <C-k> blank line mapping)
+map('n', '<C-h>', '<C-w>h', opts)
+map('n', '<C-j>', '<C-w>j', opts)
+map('n', '<C-l>', '<C-w>l', opts)
+
+-- Window resizing
+map('n', '<C-Up>', ':resize +2<CR>', opts)
+map('n', '<C-Down>', ':resize -2<CR>', opts)
+map('n', '<C-Left>', ':vertical resize -2<CR>', opts)
+map('n', '<C-Right>', ':vertical resize +2<CR>', opts)
+
+-- Buffer navigation
+map('n', '<Tab>', ':bnext<CR>', opts)
+map('n', '<S-Tab>', ':bprevious<CR>', opts)
+
+-- Better visual mode indenting (stay in visual mode)
+map('v', '<', '<gv', opts)
+map('v', '>', '>gv', opts)
+
+-- Move lines up/down in visual mode
+map('v', 'J', ":m '>+1<CR>gv=gv", opts)
+map('v', 'K', ":m '<-2<CR>gv=gv", opts)
+
+-- Centered scrolling
+map('n', '<C-d>', '<C-d>zz', opts)
+map('n', '<C-u>', '<C-u>zz', opts)
+
+-- Remove highlight with <leader>/
+map("n", "<leader>/", ":nohl<CR>", 'Remove highlight')
+
+-- Better paste (don't replace clipboard in visual mode)
+map('v', 'p', '"_dP', opts)
+
+-- Cooy and paste mappings
 map('n', '<leader>pa', 'ggVGp', "select all and paste")
 map('n', '<leader>sa', 'ggVG',  "select all")
-map("n", "<leader>/", ":nohl<CR>", 'Remove highlight')
+map('n', '<leader>cp', ':let @+=expand("%:.")<CR>', 'Copy Relative Path to Clipboard', { noremap = true, silent = true })
+map("n", "L", "vg_", "Select to end of line")
+
+-- Opening/escaping terminal windows
 map("n", "<leader>t", ":terminal<CR>", "Open terminal")
 map("n", "<leader>Tsv", ":vsp term://", "Open vertical terminal split")
 map("n", "<leader>Tsh", ":sp term://", "Open horizontal terminal split")
-map("n", "L", "vg_", "Select to end of line")
-map('', '<leader>y', '"+y', 'Yank to clipboard') -- E.g: <leader>yy will yank current line to os clipboard
-map('', '<leader>Y', '"+y$', 'Yank until EOL to clipboard')
-map('n', '<leader>p', '"+p', 'Paste after cursor from clipboard')
-map('n', '<leader>P', '"+P', 'Paste before cursor from clipboard')
+map('i', 'jj', '<Esc>', '', { noremap = true, silent = true })
+map('t', '<C-;>', '<C-\\><C-n>', 'Exit terminal mode', { noremap = true, silent = true })
 
 -- Auto-delete trailing whitespaces
-vim.api.nvim_create_autocmd("BufWritePre", {
+local autocmd = vim.api.nvim_create_autocmd
+
+autocmd("BufWritePre", {
   pattern = "*",
   callback = function()
     local save_cursor = vim.fn.getpos(".")
@@ -57,6 +103,42 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     vim.fn.setpos(".", save_cursor)
   end,
 })
+
+-- Highlight on yank (visual feedback)
+autocmd('TextYankPost', {
+  callback = function()
+    vim.highlight.on_yank({ higroup = 'IncSearch', timeout = 200 })
+  end,
+})
+
+-- Auto-create parent directories
+autocmd('BufWritePre', {
+  callback = function()
+    local dir = vim.fn.expand('<afile>:p:h')
+    if vim.fn.isdirectory(dir) == 0 then
+      vim.fn.mkdir(dir, 'p')
+    end
+  end,
+})
+
+-- Return to last edit position
+autocmd('BufReadPost', {
+  callback = function()
+    local mark = vim.api.nvim_buf_get_mark(0, '"')
+    local lcount = vim.api.nvim_buf_line_count(0)
+    if mark[1] > 0 and mark[1] <= lcount then
+      pcall(vim.api.nvim_win_set_cursor, 0, mark)
+    end
+  end,
+})
+
+
+-- Custom filetype associations
+--
+-- EJS
+--
+vim.cmd('autocmd BufNewFile,BufRead *.ejs set filetype=html')
+vim.treesitter.language.register('html', 'ejs')
 
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
