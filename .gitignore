@@ -1,2 +1,4 @@
 *.swp
 lazy-lock.json
+/lua
+/undo
