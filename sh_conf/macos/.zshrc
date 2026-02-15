@@ -593,6 +593,10 @@ fi
 # FINAL SETUP
 # ============================================
 
+eval "$(starship init zsh)"
+
+source /opt/homebrew/opt/zinit/zinit.zsh
+
 # Add Homebrew completions
 if type brew &>/dev/null; then
     FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
@@ -604,4 +608,32 @@ fi
 if brew command command-not-found-init > /dev/null 2>&1; then
     eval "$(brew command-not-found-init)"
 fi
-eval "$(starship init zsh)"
+
+# Better completion system
+autoload -Uz compinit
+compinit
+
+# Case-insensitive completion
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+
+# Better completion menu
+zstyle ':completion:*' menu select
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+
+# Alternative bindings for completion navigation
+bindkey '^[[Z' reverse-menu-complete  # Shift-Tab for reverse
+bindkey '^N' menu-complete            # Ctrl-N for forward
+bindkey '^P' reverse-menu-complete    # Ctrl-P for backward
+
+# Keep the default Ctrl-E behavior for end-of-line
+bindkey '^E' end-of-line# Enable fzf-tab
+
+# fzf-tab (optional)
+if [[ -f ~/.zsh/fzf-tab/fzf-tab.plugin.zsh ]]; then
+  source ~/.zsh/fzf-tab/fzf-tab.plugin.zsh
+fi
+
+# Configure fzf-tab
+zstyle ':fzf-tab:*' fzf-bindings 'ctrl-f:accept'
+zstyle ':fzf-tab:*' accept-line enter
+
