@@ -12,12 +12,13 @@ Complete guide for setting up a powerful development environment on macOS with z
 4. [Essential Tools Installation](#essential-tools-installation)
 5. [Neovim Setup](#neovim-setup)
 6. [ZSH Enhancements](#zsh-enhancements)
-7. [Welcome Message](#welcome-message)
-8. [Optional: Oh My Zsh](#optional-oh-my-zsh)
-9. [Testing Your Setup](#testing-your-setup)
-10. [macOS-Specific Tips](#macos-specific-tips)
-11. [Troubleshooting](#troubleshooting)
-12. [Quick Reference](#quick-reference)
+7. [Advanced ZSH Completion](#advanced-zsh-completion)
+8. [Welcome Message](#welcome-message)
+9. [Optional: Oh My Zsh](#optional-oh-my-zsh)
+10. [Testing Your Setup](#testing-your-setup)
+11. [macOS-Specific Tips](#macos-specific-tips)
+12. [Troubleshooting](#troubleshooting)
+13. [Quick Reference](#quick-reference)
 
 ---
 
@@ -294,6 +295,140 @@ echo 'source $(brew --prefix)/share/powerlevel10k/powerlevel10k.zsh-theme' >> ~/
 source ~/.zshrc
 # Follow the configuration wizard
 ```
+
+---
+
+## Advanced ZSH Completion
+
+### Improving Completion Experience (Standalone Setup)
+
+If you're experiencing issues with zsh completion in neovim terminal or want better completion UX without oh-my-zsh:
+
+#### 1. Fix Neovim Terminal Key Conflicts
+
+Add to your neovim config (`~/.config/nvim/init.lua`):
+
+```lua
+-- Pass completion keys to terminal
+vim.api.nvim_create_autocmd('TermOpen', {
+  pattern = '*',
+  callback = function()
+    local opts = { buffer = 0, noremap = true }
+    -- Pass these keys through to the terminal
+    vim.keymap.set('t', '<C-e>', '<C-e>', opts)
+    vim.keymap.set('t', '<C-n>', '<C-n>', opts)
+    vim.keymap.set('t', '<C-p>', '<C-p>', opts)
+  end,
+})
+```
+
+#### 2. Enhanced Completion Configuration
+
+Add to your `~/.zshrc`:
+
+```bash
+# Better completion system
+autoload -Uz compinit
+compinit
+
+# Case-insensitive completion
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+
+# Better completion menu
+zstyle ':completion:*' menu select
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+
+# Alternative bindings for completion navigation
+bindkey '^[[Z' reverse-menu-complete  # Shift-Tab for reverse
+bindkey '^N' menu-complete            # Ctrl-N for forward
+bindkey '^P' reverse-menu-complete    # Ctrl-P for backward
+
+# Keep the default Ctrl-E behavior for end-of-line
+bindkey '^E' end-of-line
+```
+
+#### 3. fzf-tab (Standalone - No oh-my-zsh Required)
+
+Fuzzy completion with preview:
+
+```bash
+# Install
+git clone https://github.com/Aloxaf/fzf-tab ~/.zsh/fzf-tab
+
+# Add to ~/.zshrc
+source ~/.zsh/fzf-tab/fzf-tab.plugin.zsh
+
+# Configure
+zstyle ':fzf-tab:*' fzf-bindings 'ctrl-space:accept'
+zstyle ':fzf-tab:*' accept-line enter
+
+# Reload
+source ~/.zshrc
+```
+
+#### 4. Better Autosuggestions (Standalone)
+
+Fish-like history-based suggestions:
+
+```bash
+# Install (if not using Homebrew version)
+git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
+
+# Add to ~/.zshrc
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# Accept with Ctrl-F or Ctrl-Space
+bindkey '^F' autosuggest-accept
+bindkey '^ ' autosuggest-accept  # Ctrl-Space
+```
+
+#### 5. Complete Minimal Setup Example
+
+Here's a complete standalone setup (no oh-my-zsh):
+
+```bash
+# ~/.zshrc minimal completion setup
+
+# Basic completion
+autoload -Uz compinit
+compinit
+
+# Completion styling
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+zstyle ':completion:*' menu select
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+
+# Key bindings
+bindkey '^N' menu-complete
+bindkey '^P' reverse-menu-complete
+bindkey '^E' end-of-line
+
+# fzf-tab (optional but recommended)
+if [[ -f ~/.zsh/fzf-tab/fzf-tab.plugin.zsh ]]; then
+  source ~/.zsh/fzf-tab/fzf-tab.plugin.zsh
+fi
+
+# autosuggestions (optional but recommended)
+if [[ -f ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh ]]; then
+  source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+  bindkey '^F' autosuggest-accept
+fi
+
+# Starship prompt
+eval "$(starship init zsh)"
+```
+
+### Recommended Key Bindings Summary
+
+| Key          | Action                          |
+| ------------ | ------------------------------- |
+| `Tab`        | Standard completion/menu cycle  |
+| `Shift-Tab`  | Reverse menu cycle              |
+| `Ctrl-N`     | Next completion                 |
+| `Ctrl-P`     | Previous completion             |
+| `Ctrl-E`     | End of line (standard behavior) |
+| `Ctrl-F`     | Accept autosuggestion           |
+| `Ctrl-Space` | Accept (fzf-tab/autosuggestion) |
 
 ---
 
@@ -665,6 +800,35 @@ compinit
 source ~/.zshrc
 ```
 
+### Completion Keys Not Working in Neovim Terminal
+
+If `Ctrl-E` or other completion keys don't work in neovim's terminal:
+
+```bash
+# Add to ~/.config/nvim/init.lua
+vim.api.nvim_create_autocmd('TermOpen', {
+  pattern = '*',
+  callback = function()
+    local opts = { buffer = 0, noremap = true }
+    vim.keymap.set('t', '<C-e>', '<C-e>', opts)
+    vim.keymap.set('t', '<C-n>', '<C-n>', opts)
+    vim.keymap.set('t', '<C-p>', '<C-p>', opts)
+  end,
+})
+
+# Then reload neovim
+```
+
+Alternatively, use different key bindings in zsh:
+
+```bash
+# Add to ~/.zshrc
+bindkey '^N' menu-complete       # Use Ctrl-N instead
+bindkey '^F' autosuggest-accept  # Use Ctrl-F for suggestions
+```
+
+See the [Advanced ZSH Completion](#advanced-zsh-completion) section for more details.
+
 ---
 
 ## Quick Reference
@@ -844,6 +1008,7 @@ brew install gh
 ## Done!
 
 Your macOS development environment is now fully configured with:
+
 - ✅ ZSH with intelligent completion and history
 - ✅ Neovim as default editor
 - ✅ FZF fuzzy finding
