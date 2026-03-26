@@ -337,7 +337,6 @@ require("lazy").setup({
     { "ms-jpq/coq_nvim", branch = "coq" },
     { "ms-jpq/coq.artifacts", branch = "artifacts" },
     { "ms-jpq/coq.thirdparty", branch = "3p" },
-    { "pmizio/typescript-tools.nvim", dependencies = { "nvim-lua/plenary.nvim" } },
     { "hrsh7th/cmp-nvim-lsp" },
     { "hrsh7th/cmp-buffer" },
     { "hrsh7th/cmp-path" },
